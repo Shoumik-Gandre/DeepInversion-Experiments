@@ -111,5 +111,5 @@ if __name__ == '__main__':
     parser.add_argument('-e', '--epochs', type=int, default=10)
     parser.add_argument('-b', '--batch-size', type=int, default=256)
     parser.add_argument('-i', '--dataset-root', type=str)
-    parser.add_argument('-o' '--model-save-path', type=str)
+    parser.add_argument('-o', '--model-save-path', type=str)
     run(parser.parse_args())
