@@ -54,7 +54,7 @@ def eval_step(model: nn.Module, dataloader: DataLoader, device) -> Tuple[float, 
             sum_loss += loss.item()
             sum_correct += (probabilities.argmax(1) == labels).sum()
 
-        return sum_loss / len(dataloader), sum_correct / len(dataloader)
+        return sum_loss / len(dataloader), sum_correct / len(dataloader.dataset)
 
 
 def train(
