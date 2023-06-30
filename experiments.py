@@ -74,7 +74,7 @@ def run(args):
     print('==> Resuming from checkpoint..')
 
     # load models
-    load_model_pytorch(net, args.model_path, gpu_n=torch.cuda.current_device())
+    net = torch.load(args.model_path)
 
     net.to(device)
     net.eval()
@@ -178,6 +178,7 @@ def main():
     parser = argparse.ArgumentParser()
 
     parser.add_argument('--model-path', type=str, required=True)
+    # parser.add_argument('--syn-img-path', type=str, required=True)
     parser.add_argument('-s', '--worldsize', type=int, default=1,
                         help='Number of processes participating in the job.')
     parser.add_argument('--local_rank', '--rank', type=int,
