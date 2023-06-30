@@ -59,9 +59,14 @@ def run(args):
     torch.manual_seed(args.local_rank)
     device = torch.device('cuda' if torch.cuda.is_available() and not args.no_cuda else 'cpu')
 
+    # Get Network Architecture
     if args.arch_name == "resnet50v15":
         from models.resnetv15 import build_resnet
         net = build_resnet("resnet50", "classic")
+        
+    elif args.arch_name == "lenet5":
+        from models.lenet import LeNet5
+        net = LeNet5()
     else:
         print("loading torchvision model for inversion with the name: {}".format(args.arch_name))
         net = models.__dict__[args.arch_name](pretrained=True)
