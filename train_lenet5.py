@@ -102,7 +102,7 @@ def run(args: Namespace):
     )
     train_dataloader = DataLoader(train_dataset, batch_size, True)
     eval_dataloader = DataLoader(eval_dataset, batch_size)
-    net = LeNet5(in_channels=1, num_labels=10)
+    net = LeNet5(in_channels=1, num_labels=10).to(device)
     optimizer = torch.optim.Adam(net.parameters())
     train(net, optimizer, train_dataloader, eval_dataloader, epochs, device)
     torch.save(net, model_save_path)
