@@ -87,6 +87,7 @@ def run(args: Namespace):
             KeepChannelsTransform((0,)),
             transforms.Normalize((0.1307,), (0.3081,)),
         ]),
+        download=True
     )
     eval_dataset = torchvision.datasets.MNIST(
         root=dataset_root,
@@ -97,6 +98,7 @@ def run(args: Namespace):
             KeepChannelsTransform((0,)),
             transforms.Normalize((0.1307,), (0.3081,)),
         ]),
+        download=True
     )
     train_dataloader = DataLoader(train_dataset, batch_size, True)
     eval_dataloader = DataLoader(eval_dataset, batch_size)
