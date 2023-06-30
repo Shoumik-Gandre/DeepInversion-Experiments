@@ -78,6 +78,8 @@ def train(
 def run(args: Namespace):
     epochs = args.epochs
     batch_size = args.batch_size
+    Path(args.dataset_root).mkdir(exist_ok=True, parents=True)
+    Path(args.model_save_path).parent.mkdir(exist_ok=True, parents=True)
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     train_dataset = torchvision.datasets.MNIST(
         root=args.dataset_root,
