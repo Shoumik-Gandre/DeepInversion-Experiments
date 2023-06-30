@@ -31,7 +31,7 @@ def train_step(model: nn.Module, optimizer: torch.optim.Optimizer, dataloader: D
         inputs = inputs.to(device)
         labels = labels.to(device)
 
-        loss = F.binary_cross_entropy(model(inputs), labels)
+        loss = F.cross_entropy(model(inputs), labels)
         sum_loss += loss.item()
         optimizer.zero_grad()
         loss.backward()
