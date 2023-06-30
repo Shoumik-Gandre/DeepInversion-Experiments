@@ -69,7 +69,7 @@ def train(
         train_loss = train_step(model, optimizer, train_dataloader, device)
         print(train_loss)
         eval_loss, eval_accuracy = eval_step(model, eval_dataloader)
-        print(eval_loss, eval_accuracy)
+        print(eval_loss, eval_accuracy, device)
 
 
 def run(args: Namespace):
