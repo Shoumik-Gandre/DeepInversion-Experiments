@@ -56,7 +56,7 @@ def eval_step(model: nn.Module, dataloader: DataLoader, device) -> Tuple[float, 
             sum_loss += loss.item()
             sum_correct += (probabilities.argmax(1) == labels).sum()
 
-        return sum_loss / len(dataloader), sum_correct / len(dataloader.dataset)
+        return float(sum_loss / len(dataloader)), float(sum_correct / len(dataloader.dataset))
 
 
 def train(
@@ -68,7 +68,7 @@ def train(
         device
     ):
     for epoch in range(1, num_epochs+1):
-        print(f"Epoch [{epoch+1}/{num_epochs}]")
+        print(f"Epoch [{epoch}/{num_epochs}]")
         train_loss = train_step(model, optimizer, train_dataloader, device)
         print(train_loss)
         eval_loss, eval_accuracy = eval_step(model, eval_dataloader, device)

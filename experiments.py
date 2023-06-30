@@ -74,10 +74,7 @@ def run(args):
     print('==> Resuming from checkpoint..')
 
     # load models
-    if args.arch_name == "resnet50v15":
-        path_to_model = "./models/resnet50v15/model_best.pth.tar"
-        load_model_pytorch(net, path_to_model,
-                           gpu_n=torch.cuda.current_device())
+    load_model_pytorch(net, args.model_path, gpu_n=torch.cuda.current_device())
 
     net.to(device)
     net.eval()
@@ -179,6 +176,8 @@ def run(args):
 
 def main():
     parser = argparse.ArgumentParser()
+
+    parser.add_argument('--model-path', type=str, required=True)
     parser.add_argument('-s', '--worldsize', type=int, default=1,
                         help='Number of processes participating in the job.')
     parser.add_argument('--local_rank', '--rank', type=int,
