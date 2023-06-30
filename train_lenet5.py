@@ -3,6 +3,8 @@ Train LeNet to get a pretrained model for experiments
 """
 from argparse import ArgumentParser, Namespace
 from typing import Tuple
+from pathlib import Path
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -65,7 +67,8 @@ def train(
         num_epochs: int, 
         device
     ):
-    for epoch in range(num_epochs):
+    for epoch in range(1, num_epochs+1):
+        print(f"Epoch [{epoch+1}/{num_epochs}]")
         train_loss = train_step(model, optimizer, train_dataloader, device)
         print(train_loss)
         eval_loss, eval_accuracy = eval_step(model, eval_dataloader, device)
@@ -73,13 +76,11 @@ def train(
 
 
 def run(args: Namespace):
-    epochs = 10
-    batch_size = 256
-    model_save_path = ''
-    dataset_root = ''
+    epochs = args.epochs
+    batch_size = args.batch_size
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     train_dataset = torchvision.datasets.MNIST(
-        root=dataset_root,
+        root=args.dataset_root,
         train=True,
         transform=transforms.Compose([  
             transforms.Resize((32, 32)),
@@ -90,7 +91,7 @@ def run(args: Namespace):
         download=True
     )
     eval_dataset = torchvision.datasets.MNIST(
-        root=dataset_root,
+        root=args.dataset_root,
         train=False,
         transform=transforms.Compose([  
             transforms.Resize((32, 32)),
@@ -105,7 +106,7 @@ def run(args: Namespace):
     net = LeNet5(in_channels=1, num_labels=10).to(device)
     optimizer = torch.optim.Adam(net.parameters())
     train(net, optimizer, train_dataloader, eval_dataloader, epochs, device)
-    torch.save(net, model_save_path)
+    torch.save(net, args.model_save_path)
 
 
 if __name__ == '__main__':
