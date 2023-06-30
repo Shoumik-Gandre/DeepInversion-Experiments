@@ -68,8 +68,8 @@ def train(
     for epoch in range(num_epochs):
         train_loss = train_step(model, optimizer, train_dataloader, device)
         print(train_loss)
-        eval_loss, eval_accuracy = eval_step(model, eval_dataloader)
-        print(eval_loss, eval_accuracy, device)
+        eval_loss, eval_accuracy = eval_step(model, eval_dataloader, device)
+        print(eval_loss, eval_accuracy)
 
 
 def run(args: Namespace):
