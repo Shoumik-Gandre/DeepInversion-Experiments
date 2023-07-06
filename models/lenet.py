@@ -15,7 +15,7 @@ class LeNet5(nn.Module):
         self.relu2 = nn.ReLU()
         self.maxpool2 = nn.MaxPool2d(kernel_size=2, stride=2)
         self.conv3 = nn.Conv2d(16, 120, kernel_size=5)
-        self.bn3 = nn.BatchNorm2d(20)
+        self.bn3 = nn.BatchNorm2d(120)
         self.relu3 = nn.ReLU()
         self.fc1 = nn.Linear(120, 84)
         self.bn4 = nn.BatchNorm2d(84)
