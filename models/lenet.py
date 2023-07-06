@@ -18,7 +18,7 @@ class LeNet5(nn.Module):
         self.bn3 = nn.BatchNorm2d(120)
         self.relu3 = nn.ReLU()
         self.fc1 = nn.Linear(120, 84)
-        self.bn4 = nn.BatchNorm2d(84)
+        self.bn4 = nn.BatchNorm1d(84)
         self.relu4 = nn.ReLU()
         self.fc2 = nn.Linear(84, num_labels)
 
