@@ -204,7 +204,7 @@ class DeepInversionClass(object):
         img_original = self.image_resolution
 
         data_type = torch.half if use_fp16 else torch.float
-        inputs = torch.randn((self.bs, 3, img_original, img_original), requires_grad=True, device='cuda',
+        inputs = torch.randn((self.bs, 1, img_original, img_original), requires_grad=True, device='cuda',
                              dtype=data_type)
         pooling_function = nn.modules.pooling.AvgPool2d(kernel_size=2)
 
