@@ -7,14 +7,18 @@ class LeNet5(nn.Module):
         super(LeNet5, self).__init__()
 
         self.conv1 = nn.Conv2d(in_channels, 6, kernel_size=5)
+        self.bn1 = nn.BatchNorm2d(6)
         self.relu1 = nn.ReLU()
         self.maxpool1 = nn.MaxPool2d(kernel_size=2, stride=2)
         self.conv2 = nn.Conv2d(6, 16, kernel_size=5)
+        self.bn2 = nn.BatchNorm2d(16)
         self.relu2 = nn.ReLU()
         self.maxpool2 = nn.MaxPool2d(kernel_size=2, stride=2)
         self.conv3 = nn.Conv2d(16, 120, kernel_size=5)
+        self.bn3 = nn.BatchNorm2d(20)
         self.relu3 = nn.ReLU()
         self.fc1 = nn.Linear(120, 84)
+        self.bn4 = nn.Linear(84)
         self.relu4 = nn.ReLU()
         self.fc2 = nn.Linear(84, num_labels)
 
