@@ -23,6 +23,7 @@ class LeNet5(nn.Module):
         self.fc2 = nn.Linear(84, num_labels)
 
     def forward(self, img, out_feature=False):
+        print(img.shape)
         output = self.conv1(img)
         output = self.bn1(output)
         output = self.relu1(output)
