@@ -224,7 +224,7 @@ class DeepInversionClass(object):
             skipfirst = True
 
         iteration = 0
-        for lr_it, lower_res in enumerate([2, 1]):
+        for lr_it, lower_res in enumerate([2]):
             if lr_it==0:
                 iterations_per_layer = 2000
             else:
@@ -281,7 +281,7 @@ class DeepInversionClass(object):
                 # forward pass
                 optimizer.zero_grad()
                 net_teacher.zero_grad()
-                print(inputs_jit.shape)
+
                 outputs = net_teacher(inputs_jit)
                 outputs = self.network_output_function(outputs)
 
