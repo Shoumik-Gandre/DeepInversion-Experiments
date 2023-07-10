@@ -101,6 +101,7 @@ def run(args: Namespace):
         root=args.dataset_root,
         train=False,
         transform=transforms.Compose([  
+            transforms.Grayscale(3),
             transforms.Resize((32, 32)),
             transforms.ToTensor(),
             # KeepChannelsTransform((0,)),
