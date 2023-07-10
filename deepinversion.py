@@ -201,8 +201,7 @@ class DeepInversionClass(object):
             if not self.random_label:
                 # preselected classes, good for ResNet50v1.5
                 targets = [1, 933, 946, 980, 25, 63, 92, 94, 107, 985, 151, 154, 207, 250, 270, 277, 283, 292, 294, 309,
-                           311,
-                           325, 340, 360, 386, 402, 403, 409, 530, 440, 468, 417, 590, 670, 817, 762, 920, 949, 963,
+                           311, 325, 340, 360, 386, 402, 403, 409, 530, 440, 468, 417, 590, 670, 817, 762, 920, 949, 963,
                            967, 574, 487]
 
                 targets = torch.LongTensor(targets * (int(self.bs / len(targets)))).to('cuda')
@@ -216,6 +215,7 @@ class DeepInversionClass(object):
             device='cuda',
             dtype=data_type
         )
+        print(inputs.shape)
         pooling_function = nn.modules.pooling.AvgPool2d(kernel_size=2)
 
         if self.setting_id==0:
