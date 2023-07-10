@@ -60,8 +60,10 @@ def get_image_prior_losses(inputs_jit):
     diff4 = inputs_jit[:, :, :-1, :-1] - inputs_jit[:, :, 1:, 1:]
 
     loss_var_l2 = torch.norm(diff1) + torch.norm(diff2) + torch.norm(diff3) + torch.norm(diff4)
-    loss_var_l1 = (diff1.abs() / 255.0).mean() + (diff2.abs() / 255.0).mean() + (
-            diff3.abs() / 255.0).mean() + (diff4.abs() / 255.0).mean()
+    loss_var_l1 = (diff1.abs() / 255.0).mean() \
+        + (diff2.abs() / 255.0).mean() \
+        + (diff3.abs() / 255.0).mean() \
+        + (diff4.abs() / 255.0).mean()
     loss_var_l1 = loss_var_l1 * 255.0
     return loss_var_l1, loss_var_l2
 
@@ -195,7 +197,7 @@ class DeepInversionClass(object):
         # setup target labels
         if targets is None:
             #only works for classification now, for other tasks need to provide target vector
-            targets = torch.LongTensor([random.randint(0, self.num_targets) for _ in range(self.bs)]).to('cuda')
+            targets = torch.LongTensor([random.randrange(0, self.num_targets) for _ in range(self.bs)]).to('cuda')
             if not self.random_label:
                 # preselected classes, good for ResNet50v1.5
                 targets = [1, 933, 946, 980, 25, 63, 92, 94, 107, 985, 151, 154, 207, 250, 270, 277, 283, 292, 294, 309,
