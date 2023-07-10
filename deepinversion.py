@@ -224,7 +224,7 @@ class DeepInversionClass(object):
             skipfirst = True
 
         iteration = 0
-        for lr_it, lower_res in enumerate([2]):
+        for lr_it, lower_res in enumerate([1]):
             if lr_it==0:
                 iterations_per_layer = 2000
             else:
