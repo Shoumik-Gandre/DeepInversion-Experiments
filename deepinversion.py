@@ -67,7 +67,10 @@ def get_image_prior_losses(inputs_jit):
 
 
 class DeepInversionClass(object):
-    def __init__(self, bs=84,
+    def __init__(self, 
+                 num_channels: int,
+                 num_targets: int,
+                 bs: int=84,
                  use_fp16=True, net_teacher=None, path="./gen_images/",
                  final_data_path="/gen_images_final/",
                  parameters=dict(),
@@ -110,7 +113,8 @@ class DeepInversionClass(object):
         print("Deep inversion class generation")
         # for reproducibility
         torch.manual_seed(torch.cuda.current_device())
-
+        self.num_channels = num_channels
+        self.num_targets = num_targets
         self.net_teacher = net_teacher
 
         if "resolution" in parameters.keys():
@@ -191,7 +195,7 @@ class DeepInversionClass(object):
         # setup target labels
         if targets is None:
             #only works for classification now, for other tasks need to provide target vector
-            targets = torch.LongTensor([random.randint(0, 999) for _ in range(self.bs)]).to('cuda')
+            targets = torch.LongTensor([random.randint(0, self.num_targets) for _ in range(self.bs)]).to('cuda')
             if not self.random_label:
                 # preselected classes, good for ResNet50v1.5
                 targets = [1, 933, 946, 980, 25, 63, 92, 94, 107, 985, 151, 154, 207, 250, 270, 277, 283, 292, 294, 309,
@@ -202,11 +206,10 @@ class DeepInversionClass(object):
                 targets = torch.LongTensor(targets * (int(self.bs / len(targets)))).to('cuda')
 
         img_original = self.image_resolution
-        num_channels = 1
 
         data_type = torch.half if use_fp16 else torch.float
         inputs = torch.randn(
-            (self.bs, num_channels, img_original, img_original), 
+            (self.bs, self.num_channels, img_original, img_original), 
             requires_grad=True, 
             device='cuda',
             dtype=data_type

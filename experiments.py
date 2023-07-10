@@ -156,7 +156,9 @@ def run(args):
     else:
         hook_for_display = None
 
-    DeepInversionEngine = DeepInversionClass(net_teacher=net,
+    DeepInversionEngine = DeepInversionClass(num_channels=1,
+                                             num_targets=10,
+                                             net_teacher=net,
                                              final_data_path=adi_data_path,
                                              path=exp_name,
                                              parameters=parameters,
