@@ -88,7 +88,7 @@ def run(args: Namespace):
             transforms.Grayscale(3),
             transforms.Resize((32, 32)),
             transforms.ToTensor(),
-            KeepChannelsTransform((0,)),
+            # KeepChannelsTransform((0,)),
             transforms.Normalize((0.1307,), (0.3081,)),
         ]),
         download=True
@@ -103,7 +103,7 @@ def run(args: Namespace):
         transform=transforms.Compose([  
             transforms.Resize((32, 32)),
             transforms.ToTensor(),
-            KeepChannelsTransform((0,)),
+            # KeepChannelsTransform((0,)),
             transforms.Normalize((0.1307,), (0.3081,)),
         ]),
         download=True
