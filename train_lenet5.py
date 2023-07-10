@@ -85,6 +85,7 @@ def run(args: Namespace):
         root=args.dataset_root,
         train=True,
         transform=transforms.Compose([  
+            transforms.Grayscale(3),
             transforms.Resize((32, 32)),
             transforms.ToTensor(),
             KeepChannelsTransform((0,)),
@@ -109,7 +110,7 @@ def run(args: Namespace):
     )
     train_dataloader = DataLoader(train_dataset, batch_size, True)
     eval_dataloader = DataLoader(eval_dataset, batch_size)
-    net = LeNet5(in_channels=1, num_labels=10).to(device)
+    net = LeNet5(in_channels=3, num_labels=10).to(device)
     optimizer = torch.optim.Adam(net.parameters())
     train(net, optimizer, train_dataloader, eval_dataloader, epochs, device)
     torch.save(net, args.model_save_path)
