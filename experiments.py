@@ -86,7 +86,7 @@ def run(args):
         if args.local_rank == 0:
             print("loading verifier: ", args.verifier_arch)
             # net_verifier = models.__dict__[args.verifier_arch](pretrained=True).to(device)
-            net_verifier = LeNet5()
+            net_verifier = LeNet5(3, 10)
             net_verifier.eval()
 
             if use_fp16:
