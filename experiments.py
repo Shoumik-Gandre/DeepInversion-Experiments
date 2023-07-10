@@ -119,12 +119,12 @@ def run(args):
     args.start_noise = True
     # args.detach_student = False
 
-    args.resolution = 64
+    args.resolution = 32
     bs = args.bs
     jitter = 30
 
     parameters = dict()
-    parameters["resolution"] = 64
+    parameters["resolution"] = 32
     parameters["random_label"] = True
     parameters["start_noise"] = True
     parameters["detach_student"] = False
