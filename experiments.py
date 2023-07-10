@@ -94,8 +94,7 @@ def run(args):
 
     if args.adi_scale != 0.0:
         student_arch = "resnet18"
-        net_verifier = models.__dict__[
-            student_arch](pretrained=True).to(device)
+        net_verifier = models.__dict__[student_arch](pretrained=True).to(device)
         net_verifier.eval()
 
         if use_fp16:
@@ -156,7 +155,7 @@ def run(args):
     else:
         hook_for_display = None
 
-    DeepInversionEngine = DeepInversionClass(num_channels=1,
+    DeepInversionEngine = DeepInversionClass(num_channels=3,
                                              num_targets=10,
                                              net_teacher=net,
                                              final_data_path=adi_data_path,
