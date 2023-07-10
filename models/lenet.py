@@ -17,13 +17,13 @@ class LeNet5(nn.Module):
         self.conv3 = nn.Conv2d(16, 120, kernel_size=5)
         self.bn3 = nn.BatchNorm2d(120)
         self.relu3 = nn.ReLU()
+        self.flatten = nn.Flatten()
         self.fc1 = nn.Linear(120, 84)
         self.bn4 = nn.BatchNorm1d(84)
         self.relu4 = nn.ReLU()
         self.fc2 = nn.Linear(84, num_labels)
 
     def forward(self, img, out_feature=False):
-        print(img.shape)
         output = self.conv1(img)
         output = self.bn1(output)
         output = self.relu1(output)
@@ -35,7 +35,7 @@ class LeNet5(nn.Module):
         output = self.conv3(output)
         output = self.bn3(output)
         output = self.relu3(output)
-        feature = output.view(-1, 120)
+        feature = self.flatten(output) # .view(-1, 120) the shape[1] of feature has to be 120
         output = self.fc1(feature)
         output = self.bn4(output)
         output = self.relu4(output)

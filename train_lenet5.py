@@ -8,7 +8,7 @@ from pathlib import Path
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from torch.utils.data import DataLoader, Dataset
+from torch.utils.data import DataLoader, Dataset, TensorDataset
 import torchvision
 from torchvision.transforms import transforms
 from tqdm import tqdm
@@ -92,6 +92,10 @@ def run(args: Namespace):
         ]),
         download=True
     )
+    real_images = torch.stack([train_data[0] for train_data in train_dataset])
+    real_labels = torch.tensor([train_data[1] for train_data in train_dataset], dtype=torch.long)
+
+    train_dataset = TensorDataset(real_images, real_labels)
     eval_dataset = torchvision.datasets.MNIST(
         root=args.dataset_root,
         train=False,
