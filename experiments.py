@@ -63,8 +63,8 @@ def run(args):
                           and not args.no_cuda else 'cpu')
 
     # Get Network Architecture
-    net = LeNet5()
-
+    net = LeNet5(3, 10)
+    net = nn.DataParallel(net)
     net = net.to(device)
 
     use_fp16 = args.fp16
@@ -74,8 +74,7 @@ def run(args):
     print('==> Resuming from checkpoint..')
 
     # load models
-    net = torch.load(args.model_path)
-
+    net = nn.DataParallel(torch.load(args.model_path))
     net.to(device)
     net.eval()
 
@@ -87,6 +86,7 @@ def run(args):
             print("loading verifier: ", args.verifier_arch)
             # net_verifier = models.__dict__[args.verifier_arch](pretrained=True).to(device)
             net_verifier = LeNet5(3, 10)
+            net_verifier = nn.DataParallel(net_verifier).to(device)
             net_verifier.eval()
 
             if use_fp16:
