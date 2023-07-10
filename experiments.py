@@ -121,7 +121,7 @@ def run(args):
     args.start_noise = True
     # args.detach_student = False
 
-    args.resolution = 224
+    args.resolution = 64
     bs = args.bs
     jitter = 30
 
